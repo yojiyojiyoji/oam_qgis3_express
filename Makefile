@@ -44,9 +44,13 @@ PLUGINNAME = oam_qgis3
 
 PY_FILES = \
 	__init__.py \
-	oam_qgis3.py oam_qgis3_dialog.py
+	oam_qgis3.py \
+	oam_qgis3_dialog.py \
+	oam_qgis3_dialog_base.ui
 
-UI_FILES = oam_qgis3_dialog_base.ui
+# UI_FILES = oam_qgis3_dialog_base.ui
+
+PY_FOLDERS = gui icon module temp ext_libs i18n
 
 EXTRAS = metadata.txt icon.png
 
@@ -122,7 +126,8 @@ deploy: compile # doc transcompile
 	# $HOME/$(QGISDIR)/python/plugins
 	mkdir -p $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(PY_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
-	cp -vf $(UI_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+	# cp -vf $(UI_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+	cp -vrf $(PY_FOLDERS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(COMPILED_RESOURCE_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(EXTRAS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vfr i18n $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
