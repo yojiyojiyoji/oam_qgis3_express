@@ -32,6 +32,8 @@ import os.path
 
 # Import the code for the dialog
 from gui.test_dialog import OAMQGIS3Dialog
+from gui.img_search_dialog import ImgSearchDialog
+
 # Sample Dialog
 from .oam_qgis3_dialog import OAMQGIS3Dialog
 
@@ -166,14 +168,21 @@ class OAMQGIS3:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/oam_qgis3/icon/icon.png'
+        icon_path = ':/plugins/oam_qgis3/icon/search_icon.png'
+        self.add_action(
+            icon_path,
+            text=self.tr(u'Image Search'),
+            callback=self.displaySearchDialog,
+            parent=self.iface.mainWindow())
+
+        icon_path = ':/plugins/oam_qgis3/icon/sample_icon.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Test'),
             callback=self.test,
             parent=self.iface.mainWindow())
 
-        icon_path = ':/plugins/oam_qgis3/icon.png'
+        icon_path = ':/plugins/oam_qgis3/icon/sample_icon.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Sample Item'),
@@ -182,6 +191,12 @@ class OAMQGIS3:
 
         # will be set False in run()
         self.first_start = True
+
+    def displaySearchDialog(self):
+        print('Hello, search dialog!')
+        #self.imgSearchDialog = ImgSearchDialog(self.iface, self.settings)
+        self.imgSearchDialog = ImgSearchDialog(self.iface)
+        self.imgSearchDialog.show()
 
     def test(self):
         print('Bonjour!')

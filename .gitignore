@@ -8,5 +8,5 @@ i18n/*.qm
 gui/uic4/
 gui/*.pyc
 *.pyc
-resources_rc.py
+resources.py
 OpenAerialMap.zip

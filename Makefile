@@ -52,7 +52,8 @@ PY_FILES = \
 
 PY_FOLDERS = gui icon module temp ext_libs i18n
 
-EXTRAS = metadata.txt icon.png
+EXTRAS = metadata.txt
+#EXTRAS = metadata.txt icon.png
 
 EXTRA_DIRS =
 
