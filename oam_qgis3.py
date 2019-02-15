@@ -27,9 +27,13 @@ from PyQt5.QtWidgets import QAction
 
 # Initialize Qt resources from file resources.py
 from .resources import *
-# Import the code for the dialog
-from .oam_qgis3_dialog import OAMQGIS3Dialog
+
 import os.path
+
+# Import the code for the dialog
+from gui.test_dialog import OAMQGIS3Dialog
+# Sample Dialog
+from .oam_qgis3_dialog import OAMQGIS3Dialog
 
 
 class OAMQGIS3:
@@ -162,16 +166,27 @@ class OAMQGIS3:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
+        icon_path = ':/plugins/oam_qgis3/icon/icon.png'
+        self.add_action(
+            icon_path,
+            text=self.tr(u'Test'),
+            callback=self.test,
+            parent=self.iface.mainWindow())
+
         icon_path = ':/plugins/oam_qgis3/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'Test Item'),
+            text=self.tr(u'Sample Item'),
             callback=self.run,
             parent=self.iface.mainWindow())
 
         # will be set False in run()
         self.first_start = True
 
+    def test(self):
+        print('Bonjour!')
+        self.testDialog = OAMQGIS3Dialog()
+        self.testDialog.show()
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
