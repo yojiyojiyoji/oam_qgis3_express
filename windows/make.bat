@@ -1,9 +1,5 @@
 @ECHO OFF
-REM Please setup the path to pyrcc4.exe before executing this batch file.
-REM The file should be found in <Your QGIS Install Directory>\bin\pyrcc4.exe
-REM Ex. For Essen (version 2.14.4),
-REM SET PATH=%PATH%;C:\Program Files\QGIS Essen\bin or C:\Program Files\QGIS 2.14.4\bin, etc.
-
+REM Please execute pyrcc5_set_path.bat file stored in the same directory
 
 REM Set the default plugin folder
 SET PLUGIN_NAME=oam_qgis3
