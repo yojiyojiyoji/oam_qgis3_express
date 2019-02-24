@@ -55,6 +55,10 @@ path_requests = os.path.join(
     'ext_libs/requests-2.21.0')
 sys.path.append(path_requests)
 
+path_geopy = os.path.join(
+    os.path.dirname(__file__),
+    'ext_libs/geopy-1.18.1')
+sys.path.append(path_geopy)
 
 # noinspection PyPep8Naming
 def classFactory(iface):  # pylint: disable=invalid-name

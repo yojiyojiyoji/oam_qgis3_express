@@ -1,0 +1,43 @@
+geographiclib<2,>=1.49
+
+[dev]
+mock
+six
+flake8<3.7.0,>=3.6.0
+isort<4.4.0,>=4.3.4
+coverage
+pytest>=3.10
+readme_renderer
+sphinx
+sphinx_rtd_theme>=0.4.0
+
+[dev-docs]
+readme_renderer
+sphinx
+sphinx_rtd_theme>=0.4.0
+
+[dev-lint]
+mock
+six
+flake8<3.7.0,>=3.6.0
+isort<4.4.0,>=4.3.4
+
+[dev-lint:python_version < "3.0"]
+contextlib2
+
+[dev-test]
+mock
+six
+coverage
+pytest>=3.10
+
+[dev-test:python_version < "3.0"]
+contextlib2
+statistics
+
+[dev:python_version < "3.0"]
+contextlib2
+statistics
+
+[timezone]
+pytz
