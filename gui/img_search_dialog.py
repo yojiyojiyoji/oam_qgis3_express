@@ -22,10 +22,10 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
 #class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
-    def __init__(self, iface, parent=None):
-    #def __init__(self, iface, settings, parent=None):
+    def __init__(self, iface, settings, parent=None):
         """Constructor."""
-        super(ImgSearchDialog, self).__init__(parent)
+        #super(ImgSearchDialog, self).__init__(parent)
+        super().__init__(parent)
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see
@@ -33,3 +33,17 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.iface = iface
         self.setupUi(self)
+
+        self.settings = settings
+
+        # add objects for catalog access
+        self.settings.beginGroup("Storage")
+
+        if self.settings.value('CATALOG_URL') is None or \
+            str(self.settings.value('CATALOG_URL')) == '':
+            # self.catalogUrl = "https://oam-catalog.herokuapp.com"
+            self.catalogUrl = "http://api.openaerialmap.org"
+        else:
+            self.catalogUrl = str(self.settings.value('CATALOG_URL'))
+
+        self.settings.endGroup()

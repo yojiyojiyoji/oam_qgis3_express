@@ -71,6 +71,10 @@ class OAMQGIS3:
         self.actions = []
         self.menu = self.tr(u'&OAMQGIS3')
 
+        # QSettings objects
+        self.settings = QSettings('TEST_QT_SETTINGS', 'OAM_QGIS3')
+        # self.settings = QSettings()
+
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
         self.first_start = None
@@ -194,8 +198,7 @@ class OAMQGIS3:
 
     def displaySearchDialog(self):
         print('Hello, search dialog!')
-        #self.imgSearchDialog = ImgSearchDialog(self.iface, self.settings)
-        self.imgSearchDialog = ImgSearchDialog(self.iface)
+        self.imgSearchDialog = ImgSearchDialog(self.iface, self.settings)
         self.imgSearchDialog.show()
 
     def test(self):
