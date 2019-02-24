@@ -11,7 +11,7 @@ from PyQt5 import QtWidgets
 #from qgis.gui import QgsMessageBar
 
 #from img_browser import ImgBrowser
-#from module.module_access_oam_catalog import OAMCatalogAccess
+from module.module_access_oam_catalog import OAMCatalogAccess
 #from module.module_geocoding import nominatim_search
 
 
@@ -36,7 +36,10 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.settings = settings
 
-        # add objects for catalog access
+        # Add event listeners and handlers
+        self.pushButtonSearch.clicked.connect(self.startSearch)
+
+        # Set URL of catalog
         self.settings.beginGroup("Storage")
 
         if self.settings.value('CATALOG_URL') is None or \
@@ -47,3 +50,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
             self.catalogUrl = str(self.settings.value('CATALOG_URL'))
 
         self.settings.endGroup()
+
+    def startSearch(self):
+        test = OAMCatalogAccess("https://api.openaerialmap.org", "meta", {})
+        print("Results: " + str(test.getMetadataInList()))

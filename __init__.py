@@ -29,6 +29,32 @@ import os
 path_root = os.path.join(os.path.dirname(__file__))
 sys.path.append(path_root)
 
+# path to external libs
+path_urllib3 = os.path.join(
+    os.path.dirname(__file__),
+    'ext_libs/urllib3-1.24.1/src')
+sys.path.append(path_urllib3)
+
+path_chardet = os.path.join(
+    os.path.dirname(__file__),
+    'ext_libs/chardet-3.0.4')
+sys.path.append(path_chardet)
+
+path_certifi = os.path.join(
+    os.path.dirname(__file__),
+    'ext_libs/certifi-2018.11.29')
+sys.path.append(path_certifi)
+
+path_idna = os.path.join(
+    os.path.dirname(__file__),
+    'ext_libs/idna-2.8')
+sys.path.append(path_idna)
+
+path_requests = os.path.join(
+    os.path.dirname(__file__),
+    'ext_libs/requests-2.21.0')
+sys.path.append(path_requests)
+
 
 # noinspection PyPep8Naming
 def classFactory(iface):  # pylint: disable=invalid-name
