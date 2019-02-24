@@ -13,9 +13,9 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QListWidgetItem, QMessageBox
 
-#from img_browser import ImgBrowser
 from module.module_access_oam_catalog import OAMCatalogAccess
 from module.module_geocoding import nominatim_search
+from .img_browser import ImgBrowser
 
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -41,6 +41,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
 
         # Add event listeners and handlers
         self.pushButtonSearch.clicked.connect(self.startSearch)
+        self.listWidget.itemClicked.connect(self.testBrowseThumbnailAndMeta)
 
         # Set URL of catalog
         self.settings.beginGroup("Storage")
@@ -58,6 +59,8 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         catalogUrlLabel = self.catalog_url_label.text() + self.catalogUrl
         self.catalog_url_label.setText(catalogUrlLabel)
 
+        self.imgBrowser = None
+        
     def refreshListWidget(self, metadataInList):
 
         self.listWidget.clear()
@@ -137,6 +140,19 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
             qMsgBox.setText("Please make sure if you entered valid data" +
                             "/internet connection, and try again.")
             qMsgBox.exec_()
+
+    def testBrowseThumbnailAndMeta(self, item):
+
+        singleMetaInDict = item.data(Qt.UserRole)
+        print(str(singleMetaInDict))
+
+        if self.imgBrowser is None:
+            self.imgBrowser = ImgBrowser(self.iface)
+
+        if not self.imgBrowser.isVisible():
+            self.imgBrowser.show()
+
+        self.imgBrowser.activateWindow()
 
     def testStartSearch(self):
         test = OAMCatalogAccess("https://api.openaerialmap.org", "meta", {})
