@@ -12,6 +12,7 @@ from PyQt5 import QtWidgets
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QListWidgetItem, QMessageBox
+from qgis.gui import QgsMessageBar
 
 from module.module_access_oam_catalog import OAMCatalogAccess
 from module.module_geocoding import nominatim_search
@@ -37,11 +38,28 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         self.iface = iface
         self.setupUi(self)
 
+        self.setWindowFlags(Qt.WindowCloseButtonHint |
+                            Qt.WindowMinimizeButtonHint)
+
         self.settings = settings
+
+        # Initialize GUI
+        self.initGui()
+
+        # Initialize search queries
+        self.initQueries()
+
+        # Add Message Bar
+        self.bar = QgsMessageBar()
+        self.bar.setSizePolicy(QtWidgets.QSizePolicy.Minimum,
+            QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayoutListWidget.layout().addWidget(self.bar)
 
         # Add event listeners and handlers
         self.pushButtonSearch.clicked.connect(self.startSearch)
         self.listWidget.itemClicked.connect(self.testBrowseThumbnailAndMeta)
+        self.pbSetDefault.clicked.connect(self.setDeafult)
+        self.pbLoadDefault.clicked.connect(self.loadDeafult)
 
         # Set URL of catalog
         self.settings.beginGroup("Storage")
@@ -60,7 +78,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         self.catalog_url_label.setText(catalogUrlLabel)
 
         self.imgBrowser = None
-        
+
     def refreshListWidget(self, metadataInList):
 
         self.listWidget.clear()
@@ -140,6 +158,33 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
             qMsgBox.setText("Please make sure if you entered valid data" +
                             "/internet connection, and try again.")
             qMsgBox.exec_()
+
+    def initGui(self):
+        item = QListWidgetItem()
+        item.setText("Please set the conditions and press 'Search' button.")
+        item.setData(Qt.UserRole, "Sample Data")
+        self.listWidget.addItem(item)
+
+    def initQueries(self):
+        pass
+        """
+        self.settings.beginGroup("ImageSearch")
+        if self.settings.value('CHECKBOX_LOCATION') is None:
+            print('create new queries settings')
+            self.createQueriesSettings()
+        self.settings.endGroup()
+        self.loadQueriesSettings()
+        """
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Return:
+            self.startSearch()
+
+    def setDeafult(self):
+        print('Set Default Queries')
+
+    def loadDeafult(self):
+        print('Load Default Queries')
 
     def testBrowseThumbnailAndMeta(self, item):
 
