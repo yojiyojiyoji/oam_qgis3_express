@@ -302,6 +302,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.imgBrowser.setSingleMetaInDict(singleMetaInDict)
         self.imgBrowser.displayMetadata()
+        self.imgBrowser.displayThumbnail()
 
         self.imgBrowser.activateWindow()
 

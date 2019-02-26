@@ -6,6 +6,9 @@ from PyQt5 import uic
 from PyQt5 import QtWidgets
 
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap
+
+from module.module_download_thumbnail import ThumbnailManager
 
 # This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -32,6 +35,8 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
         self.setWindowFlags(Qt.WindowCloseButtonHint |
                             Qt.WindowMinimizeButtonHint)
 
+        self.lbThumbnail.setAlignment(Qt.AlignCenter)
+
         screenShape = QtWidgets.QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
         winW, winH = (self.frameGeometry().width(),
@@ -40,7 +45,26 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
         top = ImgBrowser.POSITION_WINDOW_FROM_TOP
         self.move(left, top)
 
+        defaultImgAbsPath = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)),
+            'temp', 'oam-logo.png')
+        lbWidth = self.lbThumbnail.width()
+        lbHeight = self.lbThumbnail.height()
+        imgThumbnail = QPixmap(defaultImgAbsPath)
+        self.lbThumbnail.setPixmap(
+            imgThumbnail.scaled(lbWidth, lbHeight,Qt.KeepAspectRatio))
+
+        """
+        self.connect(self.pushButtonDownload,
+                     QtCore.SIGNAL("clicked()"),
+                     self.downloadFullImage)
+        self.checkBoxSaveMeta.setChecked(True)
+        """
+
         self.singleMetaInDict = None
+        self.thumbnailManager = ThumbnailManager()
+
+        # self.downloadProgressWindow = None
 
     def setSingleMetaInDict(self, singleMetaInDict):
         self.singleMetaInDict = singleMetaInDict
@@ -79,3 +103,32 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
         self.formLayoutMetadata.setLabelAlignment(Qt.AlignLeft)
 
         return True
+
+    def displayThumbnail(self):
+        isDownloadSuccess = False
+        urlThumbnail = self.singleMetaInDict[u'properties'][u'thumbnail']
+        imageId = self.singleMetaInDict[u'_id']
+        prefix = str(imageId) + '_'
+        imgAbspath = self.thumbnailManager.downloadThumbnail(urlThumbnail, prefix)
+
+        if imgAbspath != 'failed':
+            isDownloadSuccess = True
+            lbWidth = self.lbThumbnail.width()
+            lbHeight = self.lbThumbnail.height()
+            imgThumbnail = QPixmap(imgAbspath)
+            self.lbThumbnail.setPixmap(
+                imgThumbnail.scaled(lbWidth, lbHeight,Qt.KeepAspectRatio))
+        else:
+            self.setDefaultThumbnail()
+
+        return isDownloadSuccess
+
+    def setDefaultThumbnail(self):
+        defaultImgAbsPath = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)),
+            'temp', 'oam-logo.png')
+        lbWidth = self.lbThumbnail.width()
+        lbHeight = self.lbThumbnail.height()
+        imgThumbnail = QPixmap(defaultImgAbsPath)
+        self.lbThumbnail.setPixmap(
+            imgThumbnail.scaled(lbWidth, lbHeight,Qt.KeepAspectRatio))
