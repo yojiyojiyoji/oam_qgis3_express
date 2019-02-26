@@ -10,7 +10,7 @@ from PyQt5 import QtWidgets
 #from PyQt4.Qt import *
 #from qgis.gui import QgsMessageBar
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QDate
 from PyQt5.QtWidgets import QListWidgetItem, QMessageBox
 from qgis.gui import QgsMessageBar
 
@@ -78,6 +78,32 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         self.catalog_url_label.setText(catalogUrlLabel)
 
         self.imgBrowser = None
+
+    def initGui(self):
+        item = QListWidgetItem()
+        item.setText("Please set the conditions and press 'Search' button.")
+        item.setData(Qt.UserRole, "Sample Data")
+        self.listWidget.addItem(item)
+
+    def initQueries(self):
+        self.settings.beginGroup("ImageSearch")
+        if self.settings.value('CHECKBOX_LOCATION') is None:
+            print('create new queries settings')
+            self.createQSettingsQueries()
+        self.settings.endGroup()
+        self.loadQSettingsQueries()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Return:
+            self.startSearch()
+
+    def setDeafult(self):
+        print('Set Default Queries')
+        self.saveQSettingsQueries()
+
+    def loadDeafult(self):
+        print('Load Default Queries')
+        self.loadQSettingsQueries()
 
     def refreshListWidget(self, metadataInList):
 
@@ -159,32 +185,109 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
                             "/internet connection, and try again.")
             qMsgBox.exec_()
 
-    def initGui(self):
-        item = QListWidgetItem()
-        item.setText("Please set the conditions and press 'Search' button.")
-        item.setData(Qt.UserRole, "Sample Data")
-        self.listWidget.addItem(item)
+    def createQSettingsQueries(self):
+        self.settings.setValue('CHECKBOX_LOCATION', True)
+        self.settings.setValue('CHECKBOX_ACQUISITION_FROM', True)
+        self.settings.setValue('CHECKBOX_ACQUISITION_TO', True)
+        self.settings.setValue('CHECKBOX_GSD_FROM', True)
+        self.settings.setValue('CHECKBOX_GSD_TO', True)
 
-    def initQueries(self):
-        pass
-        """
+        self.settings.setValue('LOCATION', '')
+        self.settings.setValue('ACQUISITION_FROM',
+            QDate.currentDate().addMonths(-12).toString(Qt.ISODate))
+        self.settings.setValue('ACQUISITION_TO',
+            QDate.currentDate().toString(Qt.ISODate))
+        self.settings.setValue('GSD_FROM', '')
+        self.settings.setValue('GSD_TO', '')
+        self.settings.setValue('LIMIT', 20)
+        self.settings.setValue('ORDER_BY', 0)
+        self.settings.setValue('SORT', 'desc')
+
+    def loadQSettingsQueries(self):
         self.settings.beginGroup("ImageSearch")
-        if self.settings.value('CHECKBOX_LOCATION') is None:
-            print('create new queries settings')
-            self.createQueriesSettings()
+
+        if str(self.settings.value('CHECKBOX_LOCATION')).lower() == 'true':
+            self.checkBoxLocation.setCheckState(2)
+        else:
+            self.checkBoxLocation.setCheckState(0)
+        if str(self.settings.value('CHECKBOX_ACQUISITION_FROM')).lower() == 'true':
+            self.checkBoxAcquisitionFrom.setCheckState(2)
+        else:
+            self.checkBoxAcquisitionFrom.setCheckState(0)
+        if str(self.settings.value('CHECKBOX_ACQUISITION_TO')).lower() == 'true':
+            self.checkBoxAcquisitionTo.setCheckState(2)
+        else:
+            self.checkBoxAcquisitionTo.setCheckState(0)
+        if str(self.settings.value('CHECKBOX_GSD_FROM')).lower() == 'true':
+            self.checkBoxResolutionFrom.setCheckState(2)
+        else:
+            self.checkBoxResolutionFrom.setCheckState(0)
+        if str(self.settings.value('CHECKBOX_GSD_TO')).lower() == 'true':
+            self.checkBoxResolutionTo.setCheckState(2)
+        else:
+            self.checkBoxResolutionTo.setCheckState(0)
+
+        self.lineEditLocation.setText(
+            self.settings.value('LOCATION'))
+        self.dateEditAcquisitionFrom.setDate(QDate.fromString(
+            self.settings.value('ACQUISITION_FROM'), Qt.ISODate))
+        self.dateEditAcquisitionTo.setDate(QDate.fromString(
+            self.settings.value('ACQUISITION_TO'), Qt.ISODate))
+        self.lineEditResolutionFrom.setText(
+            str(self.settings.value('GSD_FROM')))
+        self.lineEditResolutionTo.setText(
+            str(self.settings.value('GSD_TO')))
+        self.lineEditNumImages.setText(
+            str(self.settings.value('LIMIT')))
+        self.comboBoxOrderBy.setCurrentIndex(
+            int(self.settings.value('ORDER_BY')))
+        if self.settings.value('SORT') == 'desc':
+            self.radioButtonDesc.setChecked(True)
+        else:
+            self.radioButtonAsc.setChecked(True)
+
         self.settings.endGroup()
-        self.loadQueriesSettings()
-        """
 
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key_Return:
-            self.startSearch()
+    def saveQSettingsQueries(self):
+        self.settings.beginGroup("ImageSearch")
 
-    def setDeafult(self):
-        print('Set Default Queries')
+        self.settings.setValue('CHECKBOX_LOCATION',
+            self.checkBoxLocation.isChecked())
+        self.settings.setValue('CHECKBOX_ACQUISITION_FROM',
+            self.checkBoxAcquisitionFrom.isChecked())
+        self.settings.setValue('CHECKBOX_ACQUISITION_TO',
+            self.checkBoxAcquisitionTo.isChecked())
+        self.settings.setValue('CHECKBOX_GSD_FROM',
+            self.checkBoxResolutionFrom.isChecked())
+        self.settings.setValue('CHECKBOX_GSD_TO',
+            self.checkBoxResolutionTo.isChecked())
 
-    def loadDeafult(self):
-        print('Load Default Queries')
+        self.settings.setValue('LOCATION',
+            self.lineEditLocation.text())
+        self.settings.setValue('ACQUISITION_FROM',
+            self.dateEditAcquisitionFrom.date().toString(Qt.ISODate))
+        self.settings.setValue('ACQUISITION_TO',
+            self.dateEditAcquisitionTo.date().toString(Qt.ISODate))
+        if (self.lineEditResolutionFrom.text() != ''
+            and self.lineEditResolutionFrom.text() is not None):
+            self.settings.setValue('GSD_FROM',
+                float(self.lineEditResolutionFrom.text()))
+        if (self.lineEditResolutionTo.text() != ''
+            and self.lineEditResolutionTo.text() is not None):
+            self.settings.setValue('GSD_TO',
+                float(self.lineEditResolutionTo.text()))
+        if (self.lineEditNumImages.text() != ''
+            and self.lineEditNumImages.text() is not None):
+            self.settings.setValue('LIMIT',
+                int(self.lineEditNumImages.text()))
+        self.settings.setValue('ORDER_BY',
+            self.comboBoxOrderBy.currentIndex())
+        if self.radioButtonDesc.isChecked():
+            self.settings.setValue('SORT', 'desc')
+        else:
+            self.settings.setValue('SORT', 'asc')
+
+        self.settings.endGroup()
 
     def testBrowseThumbnailAndMeta(self, item):
 
