@@ -300,6 +300,9 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         if not self.imgBrowser.isVisible():
             self.imgBrowser.show()
 
+        self.imgBrowser.setSingleMetaInDict(singleMetaInDict)
+        self.imgBrowser.displayMetadata()
+
         self.imgBrowser.activateWindow()
 
     def testStartSearch(self):
