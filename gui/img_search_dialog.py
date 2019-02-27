@@ -297,6 +297,13 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         if self.imgBrowser is None:
             self.imgBrowser = ImgBrowser(self.iface)
 
+            pos = self.pos()
+            print(pos.x())
+            print(pos.y())
+            pos.setX(pos.x() + 400)
+            pos.setY(pos.y() + 20)
+            self.imgBrowser.move(pos)
+
         if not self.imgBrowser.isVisible():
             self.imgBrowser.show()
 
@@ -305,7 +312,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         self.imgBrowser.displayThumbnail()
 
         self.imgBrowser.activateWindow()
-
+        
     def testStartSearch(self):
         test = OAMCatalogAccess("https://api.openaerialmap.org", "meta", {})
         print("Results: " + str(test.getMetadataInList()))

@@ -10,15 +10,13 @@ from PyQt5.QtGui import QPixmap
 
 from module.module_download_thumbnail import ThumbnailManager
 
-# This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
+# This loads your .ui file so that PyQt can populate your plugin with
+# the elements from Qt Designer
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_browser.ui'))
 
 
 class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
-
-    POSITION_WINDOW_FROM_RIGHT = 50
-    POSITION_WINDOW_FROM_TOP = 100
 
     def __init__(self, iface, parent=None):
         """Constructor."""
@@ -36,14 +34,6 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
                             Qt.WindowMinimizeButtonHint)
 
         self.lbThumbnail.setAlignment(Qt.AlignCenter)
-
-        screenShape = QtWidgets.QDesktopWidget().screenGeometry()
-        width, height = screenShape.width(), screenShape.height()
-        winW, winH = (self.frameGeometry().width(),
-                      self.frameGeometry().height())
-        left = width - (winW + ImgBrowser.POSITION_WINDOW_FROM_RIGHT)
-        top = ImgBrowser.POSITION_WINDOW_FROM_TOP
-        self.move(left, top)
 
         defaultImgAbsPath = os.path.join(
             os.path.dirname(os.path.dirname(__file__)),

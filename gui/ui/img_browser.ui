@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>433</width>
-    <height>558</height>
+    <height>570</height>
    </rect>
   </property>
   <property name="font">
@@ -22,10 +22,15 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>510</y>
-     <width>111</width>
-     <height>31</height>
+     <y>500</y>
+     <width>141</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Download</string>
@@ -34,8 +39,8 @@
   <widget class="QCheckBox" name="checkBoxSaveMeta">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>510</y>
+     <x>300</x>
+     <y>500</y>
      <width>111</width>
      <height>22</height>
     </rect>
@@ -47,8 +52,8 @@
   <widget class="QCheckBox" name="checkBoxAddLayer">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>530</y>
+     <x>300</x>
+     <y>520</y>
      <width>121</width>
      <height>22</height>
     </rect>

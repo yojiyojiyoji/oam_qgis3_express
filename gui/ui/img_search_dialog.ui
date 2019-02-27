@@ -269,9 +269,9 @@
   <widget class="QPushButton" name="pbSetDefault">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>380</x>
      <y>460</y>
-     <width>141</width>
+     <width>151</width>
      <height>25</height>
     </rect>
    </property>
@@ -282,9 +282,9 @@
   <widget class="QPushButton" name="pbLoadDefault">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>550</x>
      <y>460</y>
-     <width>141</width>
+     <width>151</width>
      <height>25</height>
     </rect>
    </property>
