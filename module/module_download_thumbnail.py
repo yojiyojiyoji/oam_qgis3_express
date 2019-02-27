@@ -7,7 +7,7 @@ import chardet
 import idna
 import requests
 
-class ThumbnailManager(QObject):
+class ThumbnailDownloadWorker(QObject):
 
     statusChanged = pyqtSignal(int)
     error = pyqtSignal(Exception)

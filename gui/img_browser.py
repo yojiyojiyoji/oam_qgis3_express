@@ -8,7 +8,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 
-from module.module_download_thumbnail import ThumbnailManager
+from module.module_download_thumbnail import ThumbnailDownloadWorker
 
 # This loads your .ui file so that PyQt can populate your plugin with
 # the elements from Qt Designer
@@ -52,7 +52,7 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
         """
 
         self.singleMetaInDict = None
-        self.thumbnailManager = ThumbnailManager()
+        self.thumbDownWorker = ThumbnailDownloadWorker()
 
         # self.downloadProgressWindow = None
 
@@ -99,7 +99,7 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
         urlThumbnail = self.singleMetaInDict[u'properties'][u'thumbnail']
         imageId = self.singleMetaInDict[u'_id']
         prefix = str(imageId) + '_'
-        imgAbspath = self.thumbnailManager.downloadThumbnail(urlThumbnail, prefix)
+        imgAbspath = self.thumbDownWorker.downloadThumbnail(urlThumbnail, prefix)
 
         if imgAbspath != 'failed':
             isDownloadSuccess = True
