@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
 import os, sys
-#import json
-
 from PyQt5 import uic
 from PyQt5 import QtWidgets
-
-#from PyQt4 import QtGui, uic
-#from PyQt4 import QtCore
-#from PyQt4.Qt import *
-#from qgis.gui import QgsMessageBar
-
 from PyQt5.QtCore import Qt, QDate
 from PyQt5.QtWidgets import QListWidgetItem, QMessageBox
 from qgis.gui import QgsMessageBar
@@ -24,11 +16,9 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 
 class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
-#class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
     def __init__(self, iface, settings, parent=None):
         """Constructor."""
-        #super(ImgSearchDialog, self).__init__(parent)
         super().__init__(parent)
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
@@ -57,7 +47,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
 
         # Add event listeners and handlers
         self.pushButtonSearch.clicked.connect(self.startSearch)
-        self.listWidget.itemClicked.connect(self.testBrowseThumbnailAndMeta)
+        self.listWidget.itemClicked.connect(self.browseThumbnailAndMeta)
         self.pbSetDefault.clicked.connect(self.setDeafult)
         self.pbLoadDefault.clicked.connect(self.loadDeafult)
 
@@ -289,7 +279,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.settings.endGroup()
 
-    def testBrowseThumbnailAndMeta(self, item):
+    def browseThumbnailAndMeta(self, item):
 
         singleMetaInDict = item.data(Qt.UserRole)
         print(str(singleMetaInDict))
@@ -312,7 +302,3 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         self.imgBrowser.displayThumbnail()
 
         self.imgBrowser.activateWindow()
-
-    def testStartSearch(self):
-        test = OAMCatalogAccess("https://api.openaerialmap.org", "meta", {})
-        print("Results: " + str(test.getMetadataInList()))
