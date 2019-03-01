@@ -27,18 +27,18 @@ class ThumbnailDownloadWorker(QObject):
 
         if not os.path.exists(imgAbspath):
             try:
-                r = requests.get(urlThumbnail)
+                r = requests.get(urlThumbnail, timeout=10)
                 f = open(imgAbspath, 'wb')
                 f.write(r.content)
                 f.close()
                 self.statusChanged.emit(1)
                 """
-                r = requests.get(urlThumbnail, stream=True)
+                r = requests.get(urlThumbnail, stream=True, timeout=20)
                 with open(imgAbspath, 'wb') as f:
                     for chunk in r.iter_content(chunk_size=1024):
                         if chunk: # filter out keep-alive new chunks
                             f.write(chunk)
-                            f.flush()
+                            # f.flush()
                     f.close()
                 self.statusChanged.emit(1)
                 """

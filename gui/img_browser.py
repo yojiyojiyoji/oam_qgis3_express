@@ -9,6 +9,9 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 
 from module.module_download_thumbnail import ThumbnailDownloadWorker
+from module.module_download_img_metadata import ImgMetaDownloadWorker
+from gui.download_progress_window import DownloadProgressWindow
+
 
 # This loads your .ui file so that PyQt can populate your plugin with
 # the elements from Qt Designer
@@ -44,17 +47,17 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
         self.lbThumbnail.setPixmap(
             imgThumbnail.scaled(lbWidth, lbHeight,Qt.KeepAspectRatio))
 
-        """
-        self.connect(self.pushButtonDownload,
-                     QtCore.SIGNAL("clicked()"),
-                     self.downloadFullImage)
+        self.pushButtonDownload.clicked.connect(self.downloadFullImage)
+        # self.connect(self.pushButtonDownload,
+        #              QtCore.SIGNAL("clicked()"),
+        #              self.downloadFullImage)
+
         self.checkBoxSaveMeta.setChecked(True)
-        """
 
         self.singleMetaInDict = None
         self.thumbDownWorker = ThumbnailDownloadWorker()
 
-        # self.downloadProgressWindow = None
+        self.downloadProgressWindow = None
 
     def setSingleMetaInDict(self, singleMetaInDict):
         self.singleMetaInDict = singleMetaInDict
@@ -122,3 +125,41 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
         imgThumbnail = QPixmap(defaultImgAbsPath)
         self.lbThumbnail.setPixmap(
             imgThumbnail.scaled(lbWidth, lbHeight,Qt.KeepAspectRatio))
+
+    def downloadFullImage(self):
+        urlFullImage = self.singleMetaInDict[u'uuid']
+        imgFileName = urlFullImage.split('/')[-1]
+        defaultDir = os.path.join(os.path.expanduser('~'), 'oam_images')
+        imgAbsPath = os.path.join(defaultDir, imgFileName)
+        if not os.path.exists(defaultDir):
+            os.makedirs(defaultDir)
+
+        fdlg = QtWidgets.QFileDialog()
+        fdlg.setAcceptMode(QtWidgets.QFileDialog.AcceptSave)
+        fdlg.selectFile(imgAbsPath)
+        # fdlg.setFilter("GEOTiff")
+
+        if fdlg.exec_():
+            # Download image metadata first
+            if self.checkBoxSaveMeta.isChecked():
+                urlImgMeta = self.singleMetaInDict[u'meta_uri']
+                imgMetaFilename = urlImgMeta.split('/')[-1]
+                imgMetaAbsPath = os.path.join(
+                    os.path.dirname(imgAbsPath),
+                    imgMetaFilename)
+                r = ImgMetaDownloadWorker.downloadImgMeta(
+                    urlImgMeta,
+                    imgMetaAbsPath)
+
+            # Download image
+            # Need excepton handling here?
+            if self.downloadProgressWindow is None:
+                self.downloadProgressWindow = DownloadProgressWindow(self.iface)
+
+            if self.checkBoxAddLayer.isChecked():
+                addLayer = True
+            else:
+                addLayer = False
+
+            self.downloadProgressWindow.startDownload(
+                urlFullImage, imgAbsPath, addLayer)
