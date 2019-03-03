@@ -3,7 +3,8 @@ import os
 from dateutil import parser
 
 from PyQt5 import uic
-from PyQt5 import QtWidgets
+#from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog, QFileDialog
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
@@ -19,7 +20,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_browser.ui'))
 
 
-class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
+class ImgBrowser(QDialog, FORM_CLASS):
 
     def __init__(self, iface, parent=None):
         """Constructor."""
@@ -134,19 +135,29 @@ class ImgBrowser(QtWidgets.QDialog, FORM_CLASS):
         if not os.path.exists(defaultDir):
             os.makedirs(defaultDir)
 
-        fdlg = QtWidgets.QFileDialog()
-        fdlg.setAcceptMode(QtWidgets.QFileDialog.AcceptSave)
-        fdlg.selectFile(imgAbsPath)
+        # fdlg = QFileDialog()
+        # fdlg.setDefaultSuffix('tif')
+        # fdlg.setAcceptMode(QFileDialog.AcceptSave)
+        # fdlg.selectFile(imgAbsPath)
         # fdlg.setFilter("GEOTiff")
+        rSfn = QFileDialog.getSaveFileName(
+            None, 'Save As', imgAbsPath, "TIF Files (*.tif)")
+        imgAbsPath = rSfn[0]
 
-        if fdlg.exec_():
+        # if fdlg.exec_():
+        if imgAbsPath != '':
             # Download image metadata first
             if self.checkBoxSaveMeta.isChecked():
                 urlImgMeta = self.singleMetaInDict[u'meta_uri']
-                imgMetaFilename = urlImgMeta.split('/')[-1]
-                imgMetaAbsPath = os.path.join(
-                    os.path.dirname(imgAbsPath),
-                    imgMetaFilename)
+                print(urlImgMeta)
+                print(imgAbsPath)
+                posLastDots = imgAbsPath.rfind('.')
+                imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
+                print(imgMetaAbsPath)
+                # imgMetaFilename = urlImgMeta.split('/')[-1]
+                # imgMetaAbsPath = os.path.join(
+                #    os.path.dirname(imgAbsPath),
+                #    imgMetaFilename)
                 r = ImgMetaDownloadWorker.downloadImgMeta(
                     urlImgMeta,
                     imgMetaAbsPath)
