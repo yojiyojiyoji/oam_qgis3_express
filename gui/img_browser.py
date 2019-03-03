@@ -161,9 +161,11 @@ class ImgBrowser(QDialog, FORM_CLASS):
                 r = ImgMetaDownloadWorker.downloadImgMeta(
                     urlImgMeta,
                     imgMetaAbsPath)
+                print(str(r))
 
             # Download image
             # Need excepton handling here?
+
             if self.downloadProgressWindow is None:
                 self.downloadProgressWindow = DownloadProgressWindow(self.iface)
 

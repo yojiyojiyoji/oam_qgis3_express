@@ -11,13 +11,15 @@ class ImgMetaDownloadWorker:
 
     @staticmethod
     def downloadImgMeta(urlImgMeta, imgMetaAbsPath):
+        isSuccess = True
         try:
-            r = requests.get(urlImgMeta)
+            r = requests.get(urlImgMeta, timeout=20)
             f = open(imgMetaAbsPath, 'w')
             f.write(r.text)
             f.close()
 
         except Exception as e:
             print(str(e))
+            isSuccess = False
 
-        return True
+        return isSuccess
