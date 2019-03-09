@@ -152,7 +152,12 @@ class ImgBrowser(QDialog, FORM_CLASS):
                 print(urlImgMeta)
                 print(imgAbsPath)
                 posLastDots = imgAbsPath.rfind('.')
-                imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
+
+                if imgAbsPath[posLastDots:] != '.tif':
+                    imgMetaAbsPath = imgAbsPath + '_meta.json'
+                else:
+                    imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
+
                 print(imgMetaAbsPath)
                 # imgMetaFilename = urlImgMeta.split('/')[-1]
                 # imgMetaAbsPath = os.path.join(
