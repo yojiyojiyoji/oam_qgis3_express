@@ -6,9 +6,9 @@ import chardet
 import idna
 import requests
 
-from urllib.request import urlopen
+# from urllib.request import urlopen
 
-class DownloadWorker(QThread):
+class ImgDownloadWorker(QThread):
 
     started = pyqtSignal(bool, int)
     valueChanged = pyqtSignal(int, int)
@@ -26,9 +26,9 @@ class DownloadWorker(QThread):
 
     def run(self):
         try:
-
+            """
             self.started.emit(True, self.index)
-            u = urlopen(self.url, timeout=20)
+            u = urlopen(self.url, timeout=30)
             f = open(self.fileAbsPath, 'wb')
             meta = u.info()
             fileSize = int(meta['Content-Length'])
@@ -45,8 +45,8 @@ class DownloadWorker(QThread):
                 p = float(fileSizeDownloaded) / fileSize
                 self.valueChanged.emit(int(p * 100), self.index)
             f.close()
-
             """
+
             self.started.emit(True, self.index)
             h = requests.head(self.url)
             fileSize = int(h.headers['Content-Length'])
@@ -56,7 +56,7 @@ class DownloadWorker(QThread):
             # print("Downloading: {0} Bytes: {1}".format(
             #                 str(self.url), str(fileSize)))
 
-            r = requests.get(self.url, stream=True, timeout=20)
+            r = requests.get(self.url, stream=True, timeout=30)
             with open(self.fileAbsPath, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=blockSize):
                     if not chunk or self.isRunning is False:
@@ -69,7 +69,6 @@ class DownloadWorker(QThread):
                     # print('{}/{} : {}% index:{}'.format(
                     #     fileSizeDownloaded, fileSize, int(p * 100), self.index))
                 f.close()
-            """
 
             if self.isRunning is True:
                 self.finished.emit('success', self.index)

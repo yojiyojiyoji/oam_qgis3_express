@@ -15,15 +15,16 @@ from PyQt4.Qt import *
 import os
 from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QProgressBar, QPushButton
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QPushButton
+from PyQt5.QtWidgets import QProgressBar, QMessageBox
 
-from module.module_download_image import DownloadWorker
+from module.module_download_image import ImgDownloadWorker
 
 
 class DownloadProgressWindow(QtWidgets.QWidget):
 
-    # MAX_WINDOW_WIDTH = 600s
-    MAX_NUM_DOWNLOADS = 20
+    # MAX_WINDOW_WIDTH = 600
+    MAX_NUM_DOWNLOADS = 10
     MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR = 50
     POSITION_WINDOW_FROM_RIGHT = 10
     POSITION_WINDOW_FROM_BOTTOM = 50
@@ -134,9 +135,9 @@ class DownloadProgressWindow(QtWidgets.QWidget):
             self.cancelButtons[self.activeId].clicked.connect(
                 self.cancelDownload)
 
-            # self.dwThreads.append(DownloadWorker(
+            # self.dwThreads.append(ImgDownloadWorker(
             #       url, fileAbsPath, addLayer, threadIndex))
-            self.dwThreads.append(DownloadWorker(url,
+            self.dwThreads.append(ImgDownloadWorker(url,
                                                  fileAbsPath,
                                                  addLayer,
                                                  self.activeId))
@@ -192,4 +193,5 @@ class DownloadProgressWindow(QtWidgets.QWidget):
 
     def displayError(self, errMsg, index):
         print(str(errMsg))
-        self.qLabels[index].setText("Error: " + str(errMsg))
+        subStrErrMsg = str(errMsg)[:45]
+        self.qLabels[index].setText("Error: " + subStrErrMsg)
