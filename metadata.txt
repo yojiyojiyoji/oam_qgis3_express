@@ -8,7 +8,7 @@
 
 [general]
 name=OAMQGIS3
-qgisMinimumVersion=3.6
+qgisMinimumVersion=3.4
 description=Open Aerial Map Plugin for QGIS3
 version=0.1
 author=yojiyojiyoji

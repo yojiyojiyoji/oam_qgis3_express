@@ -76,7 +76,7 @@ class ImgDownloadWorker(QThread):
                 self.finished.emit('cancelled', self.index)
 
         except Exception as e:
-            print(e)
+            # print(e)
             self.error.emit(e, self.index)
 
     def stop(self):
