@@ -193,5 +193,5 @@ class DownloadProgressWindow(QtWidgets.QWidget):
 
     def displayError(self, errMsg, index):
         print(str(errMsg))
-        subStrErrMsg = str(errMsg)[:45]
+        subStrErrMsg = str(errMsg)[:60]
         self.qLabels[index].setText("Error: " + subStrErrMsg)
