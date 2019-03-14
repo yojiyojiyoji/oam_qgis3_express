@@ -197,7 +197,6 @@ class OAMQGIS3:
         self.first_start = True
 
     def displaySearchDialog(self):
-        print('Hello, search dialog!')
         self.imgSearchDialog = ImgSearchDialog(self.iface, self.settings)
         self.imgSearchDialog.show()
 

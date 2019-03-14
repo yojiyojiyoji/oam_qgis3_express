@@ -149,8 +149,8 @@ class ImgBrowser(QDialog, FORM_CLASS):
             # Download image metadata first
             if self.checkBoxSaveMeta.isChecked():
                 urlImgMeta = self.singleMetaInDict[u'meta_uri']
-                print(urlImgMeta)
-                print(imgAbsPath)
+                # print(urlImgMeta)
+                # print(imgAbsPath)
                 posLastDots = imgAbsPath.rfind('.')
 
                 if imgAbsPath[posLastDots:] != '.tif':
@@ -158,7 +158,7 @@ class ImgBrowser(QDialog, FORM_CLASS):
                 else:
                     imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
 
-                print(imgMetaAbsPath)
+                # print(imgMetaAbsPath)
                 # imgMetaFilename = urlImgMeta.split('/')[-1]
                 # imgMetaAbsPath = os.path.join(
                 #    os.path.dirname(imgAbsPath),
@@ -166,7 +166,7 @@ class ImgBrowser(QDialog, FORM_CLASS):
                 r = ImgMetaDownloadWorker.downloadImgMeta(
                     urlImgMeta,
                     imgMetaAbsPath)
-                print(str(r))
+                # print(str(r))
 
             # Download image
             # Need excepton handling here?

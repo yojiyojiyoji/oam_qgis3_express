@@ -113,7 +113,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
             if self.checkBoxLocation.isChecked():
                 location = self.lineEditLocation.text()
                 strBboxForOAM = nominatim_search(location)
-                print(strBboxForOAM)
+                # print(strBboxForOAM)
                 if strBboxForOAM != 'failed':
                     dictQueries['bbox'] = strBboxForOAM
                 else:
@@ -153,7 +153,7 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
             elif self.comboBoxOrderBy.currentText() == 'GSD':
                 dictQueries['order_by'] = "gsd"
 
-            print(self.comboBoxOrderBy.currentText())
+            # print(self.comboBoxOrderBy.currentText())
 
 
             if self.radioButtonAsc.isChecked():
@@ -282,14 +282,14 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
     def browseThumbnailAndMeta(self, item):
 
         singleMetaInDict = item.data(Qt.UserRole)
-        print(str(singleMetaInDict))
+        # print(str(singleMetaInDict))
 
         if self.imgBrowser is None:
             self.imgBrowser = ImgBrowser(self.iface)
 
             pos = self.pos()
-            print(pos.x())
-            print(pos.y())
+            # print(pos.x())
+            # print(pos.y())
             pos.setX(pos.x() + 400)
             pos.setY(pos.y() + 20)
             self.imgBrowser.move(pos)
