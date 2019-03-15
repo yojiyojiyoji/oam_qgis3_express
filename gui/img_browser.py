@@ -148,29 +148,31 @@ class ImgBrowser(QDialog, FORM_CLASS):
         if imgAbsPath != '':
             # Download image metadata first
             if self.checkBoxSaveMeta.isChecked():
-                urlImgMeta = self.singleMetaInDict[u'meta_uri']
-                # print(urlImgMeta)
-                # print(imgAbsPath)
-                posLastDots = imgAbsPath.rfind('.')
+                try:
+                    urlImgMeta = self.singleMetaInDict[u'meta_uri']
+                    # print(urlImgMeta)
+                    # print(imgAbsPath)
+                    posLastDots = imgAbsPath.rfind('.')
 
-                if imgAbsPath[posLastDots:] != '.tif':
-                    imgMetaAbsPath = imgAbsPath + '_meta.json'
-                else:
-                    imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
+                    if imgAbsPath[posLastDots:] != '.tif':
+                        imgMetaAbsPath = imgAbsPath + '_meta.json'
+                    else:
+                        imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
 
-                # print(imgMetaAbsPath)
-                # imgMetaFilename = urlImgMeta.split('/')[-1]
-                # imgMetaAbsPath = os.path.join(
-                #    os.path.dirname(imgAbsPath),
-                #    imgMetaFilename)
-                r = ImgMetaDownloadWorker.downloadImgMeta(
-                    urlImgMeta,
-                    imgMetaAbsPath)
-                # print(str(r))
+                    # print(imgMetaAbsPath)
+                    # imgMetaFilename = urlImgMeta.split('/')[-1]
+                    # imgMetaAbsPath = os.path.join(
+                    #    os.path.dirname(imgAbsPath),
+                    #    imgMetaFilename)
+                    r = ImgMetaDownloadWorker.downloadImgMeta(
+                        urlImgMeta,
+                        imgMetaAbsPath)
+                    # print(str(r))
+                except:
+                    print('Problem occurred for downloading image metadata.')
 
             # Download image
             # Need excepton handling here?
-
             if self.downloadProgressWindow is None:
                 self.downloadProgressWindow = DownloadProgressWindow(self.iface)
 
