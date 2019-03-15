@@ -31,11 +31,9 @@ from .resources import *
 import os.path
 
 # Import the code for the dialog
-from gui.test_dialog import OAMQGIS3Dialog
 from gui.img_search_dialog import ImgSearchDialog
-
 # Sample Dialog
-from .oam_qgis3_dialog import OAMQGIS3Dialog
+# from .oam_qgis3_dialog import OAMQGIS3Dialog
 
 
 class OAMQGIS3:
@@ -77,7 +75,8 @@ class OAMQGIS3:
 
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
-        self.first_start = None
+        self.first_start_search_dialog = None
+        # self.first_start = None
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -179,31 +178,18 @@ class OAMQGIS3:
             callback=self.displaySearchDialog,
             parent=self.iface.mainWindow())
 
-        icon_path = ':/plugins/oam_qgis3/icon/sample_icon.png'
-        self.add_action(
-            icon_path,
-            text=self.tr(u'Test'),
-            callback=self.test,
-            parent=self.iface.mainWindow())
-
+        """
         icon_path = ':/plugins/oam_qgis3/icon/sample_icon.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Sample Item'),
             callback=self.run,
             parent=self.iface.mainWindow())
+        """
 
-        # will be set False in run()
-        self.first_start = True
-
-    def displaySearchDialog(self):
-        self.imgSearchDialog = ImgSearchDialog(self.iface, self.settings)
-        self.imgSearchDialog.show()
-
-    def test(self):
-        print('Bonjour!')
-        self.testDialog = OAMQGIS3Dialog()
-        self.testDialog.show()
+        # will be set False in displaySearchDialog() and run()
+        self.first_start_search_dialog = True
+        # self.first_start = True
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -214,9 +200,9 @@ class OAMQGIS3:
             self.iface.removeToolBarIcon(action)
 
 
+    """Please refer to the displaySearchDialog function below"""
+    """
     def run(self):
-        """Run method that performs all the real work"""
-
         # Create the dialog with elements (after translation) and keep reference
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
         if self.first_start == True:
@@ -227,6 +213,26 @@ class OAMQGIS3:
         self.dlg.show()
         # Run the dialog event loop
         result = self.dlg.exec_()
+        # See if OK was pressed
+        if result:
+            # Do something useful here - delete the line containing pass and
+            # substitute with your code.
+            pass
+    """
+
+    def displaySearchDialog(self):
+
+        if self.first_start_search_dialog == True:
+            self.first_start_search_dialog = False
+            self.imgSearchDialog = ImgSearchDialog(self.iface, self.settings)
+
+        # show the dialog
+        self.imgSearchDialog.show()
+
+        # Run the dialog event loop
+        result = self.imgSearchDialog.exec_()
+        print(result)
+
         # See if OK was pressed
         if result:
             # Do something useful here - delete the line containing pass and
