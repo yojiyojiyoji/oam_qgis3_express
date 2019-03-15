@@ -106,6 +106,7 @@ class DownloadProgressWindow(QtWidgets.QWidget):
         print('Left: ' + str(posLeft) + ' Top: ' + str(posTop))
         print('')
 
+    """
     def setWindowPosition(self):
         # This part need to be modified...
         maxHeight = int(
@@ -127,6 +128,7 @@ class DownloadProgressWindow(QtWidgets.QWidget):
         # print('Left: ' + str(left) + ' Top: ' + str(top))
         # print('')
         self.move(left, top)
+    """
 
     def startDownload(self, url=None, fileAbsPath=None, addLayer=True):
 
