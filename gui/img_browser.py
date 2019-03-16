@@ -3,7 +3,6 @@ import os
 from dateutil import parser
 
 from PyQt5 import uic
-#from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QFileDialog
 
 from PyQt5.QtCore import Qt
@@ -49,9 +48,6 @@ class ImgBrowser(QDialog, FORM_CLASS):
             imgThumbnail.scaled(lbWidth, lbHeight,Qt.KeepAspectRatio))
 
         self.pushButtonDownload.clicked.connect(self.downloadFullImage)
-        # self.connect(self.pushButtonDownload,
-        #              QtCore.SIGNAL("clicked()"),
-        #              self.downloadFullImage)
 
         self.checkBoxSaveMeta.setChecked(True)
 
@@ -136,10 +132,6 @@ class ImgBrowser(QDialog, FORM_CLASS):
             os.makedirs(defaultDir)
 
         # fdlg = QFileDialog()
-        # fdlg.setDefaultSuffix('tif')
-        # fdlg.setAcceptMode(QFileDialog.AcceptSave)
-        # fdlg.selectFile(imgAbsPath)
-        # fdlg.setFilter("GEOTiff")
         rSfn = QFileDialog.getSaveFileName(
             None, 'Save As', imgAbsPath, "TIF Files (*.tif)")
         imgAbsPath = rSfn[0]
@@ -160,10 +152,6 @@ class ImgBrowser(QDialog, FORM_CLASS):
                         imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
 
                     # print(imgMetaAbsPath)
-                    # imgMetaFilename = urlImgMeta.split('/')[-1]
-                    # imgMetaAbsPath = os.path.join(
-                    #    os.path.dirname(imgAbsPath),
-                    #    imgMetaFilename)
                     r = ImgMetaDownloadWorker.downloadImgMeta(
                         urlImgMeta,
                         imgMetaAbsPath)

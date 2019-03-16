@@ -1,17 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-import sys, os, time
-import urllib2
-import json
-from PyQt4 import QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import QThread, pyqtSignal, QObject
-from PyQt4.Qt import *
-"""
-# from PyQt5.QtWidgets import QListWidgetItem, QMessageBox
-# from qgis.gui import QgsMessageBar
-# from PyQt5 import uic
-
 import os
 from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets
@@ -30,7 +17,6 @@ class DownloadProgressWindow(QtWidgets.QWidget):
     POSITION_WINDOW_FROM_BOTTOM = 75
 
     def __init__(self, iface=None, parent=None):
-        # from PyQt5.QtCore import Qt, QDate
         # QtWidget.__init__(self)
         super().__init__(parent)
         self.iface = iface
@@ -70,10 +56,10 @@ class DownloadProgressWindow(QtWidgets.QWidget):
         posTop = screenHeight - (winHeight + self.POSITION_WINDOW_FROM_BOTTOM)
         self.move(posLeft, posTop)
 
-        print('Pos_X: {}'.format(posLeft))
-        print('Pos_Y: {}'.format(posTop))
-        print('Win Width: {}'.format(self.frameGeometry().width()))
-        print('Win Height: {}'.format(self.frameGeometry().height()))
+        # print('Pos_X: {}'.format(posLeft))
+        # print('Pos_Y: {}'.format(posTop))
+        # print('Win Width: {}'.format(self.frameGeometry().width()))
+        # print('Win Height: {}'.format(self.frameGeometry().height()))
 
     def adjustWindowPosition(self):
         screenShape = QtWidgets.QDesktopWidget().screenGeometry()
@@ -99,36 +85,12 @@ class DownloadProgressWindow(QtWidgets.QWidget):
                 winHeight + self.POSITION_WINDOW_FROM_BOTTOM)
             self.move(self.pos().x(), posTop)
 
-        print('ScreenW: ' + str(screenWidth) +
-              ' ScreenH:' + str(screenHeight))
-        print('WinWidth: ' + str(winWidth) +
-              ' WinHeight: ' + str(winHeight))
-        print('Left: ' + str(posLeft) + ' Top: ' + str(posTop))
-        print('')
-
-    """
-    def setWindowPosition(self):
-        # This part need to be modified...
-        maxHeight = int(
-            DownloadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
-        # self.setMaximumWidth(DownloadProgressWindow.MAX_WINDOW_WIDTH)
-        self.setMaximumHeight(maxHeight)
-        screenShape = QtWidgets.QDesktopWidget().screenGeometry()
-        width, height = screenShape.width(), screenShape.height()
-        winW, winH = (self.frameGeometry().width(),
-                      self.frameGeometry().height())
-        left = width - (
-                winW + DownloadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
-        top = height - (
-                winH + DownloadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
-        # print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
-        # print('WinWidth: ' + str(winW) +
-        #     ' WinHeight: ' + str(winH) +
-        #     ' MaxHeight: ' + str(maxHeight))
-        # print('Left: ' + str(left) + ' Top: ' + str(top))
+        # print('ScreenW: ' + str(screenWidth) +
+        #       ' ScreenH:' + str(screenHeight))
+        # print('WinWidth: ' + str(winWidth) +
+        #       ' WinHeight: ' + str(winHeight))
+        # print('Left: ' + str(posLeft) + ' Top: ' + str(posTop))
         # print('')
-        self.move(left, top)
-    """
 
     def startDownload(self, url=None, fileAbsPath=None, addLayer=True):
 
@@ -179,14 +141,9 @@ class DownloadProgressWindow(QtWidgets.QWidget):
             self.qLabels[self.activeId].setText(fileName)
 
             # add event listener and handlers to cancel buttons
-            # threadIndex = self.activeId
-            # self.cancelButtons[self.activeId].clicked.connect(
-            #  lambda: self.cancelDownload(threadIndex))
             self.cancelButtons[self.activeId].clicked.connect(
                 self.cancelDownload)
 
-            # self.dwThreads.append(ImgDownloadWorker(
-            #       url, fileAbsPath, addLayer, threadIndex))
             self.dwThreads.append(ImgDownloadWorker(url,
                                                  fileAbsPath,
                                                  addLayer,
@@ -200,9 +157,6 @@ class DownloadProgressWindow(QtWidgets.QWidget):
             self.dwThreads[self.activeId].error.connect(
                 self.displayError)
             self.dwThreads[self.activeId].start()
-            # self.dwThread.run()
-            # self.dwThread.wait()
-            # self.dwThread.terminate()
 
 
             if self.activeId == 0:
@@ -212,7 +166,6 @@ class DownloadProgressWindow(QtWidgets.QWidget):
                 self.activateWindow()
                 self.adjustWindowPosition()
 
-    # def cancelDownload(self, btnIndex):
     def cancelDownload(self):
         for index in range(0, len(self.cancelButtons)):
             if self.cancelButtons[index] == self.sender():
