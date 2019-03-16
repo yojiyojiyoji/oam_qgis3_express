@@ -7,17 +7,17 @@
 # This file should be included when you package your plugin.# Mandatory items:
 
 [general]
-name=OAMQGIS3
+name=Open Aerial Map (OAM) for QGIS3
 qgisMinimumVersion=3.4
-description=Open Aerial Map Plugin for QGIS3
+description=Open Aerial Map (OAM) client for QGIS3
 version=0.1
 author=yojiyojiyoji
 email=yoji.salut@gmail.com
 
-about=Open Aerial Map Plugin for QGIS3
+about=This plugin allows QGIS3 users to access to various OAM services, acting as a desktop client.
 
-tracker=http://bugs
-repository=http://repo
+tracker=https://github.com/yojiyojiyoji/oam_qgis3/issues
+repository=https://github.com/yojiyojiyoji/oam_qgis3.git
 # End of mandatory metadata
 
 # Recommended items:
@@ -26,13 +26,13 @@ repository=http://repo
 # changelog=
 
 # Tags are comma separated with spaces allowed
-tags=python
+tags=python, openstreetmap, osm, raster, remote sensing, uav
 
-homepage=http://homepage
+homepage=https://github.com/yojiyojiyoji/oam_qgis3.git
 category=Plugins
 icon=icon/icon.png
 # experimental flag
-experimental=False
+experimental=True
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
