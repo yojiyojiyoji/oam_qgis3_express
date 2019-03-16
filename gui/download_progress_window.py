@@ -210,7 +210,7 @@ class DownloadProgressWindow(QtWidgets.QWidget):
                 self.initWindowPosition()
             else:
                 self.activateWindow()
-                # self.adjustWindowPosition()
+                self.adjustWindowPosition()
 
     # def cancelDownload(self, btnIndex):
     def cancelDownload(self):

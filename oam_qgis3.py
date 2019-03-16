@@ -70,7 +70,7 @@ class OAMQGIS3:
         self.menu = self.tr(u'&OAMQGIS3')
 
         # QSettings objects
-        self.settings = QSettings('TEST_QT_SETTINGS', 'OAM_QGIS3')
+        self.settings = QSettings('QGIS', 'TEST_OAM_QGIS3')
         # self.settings = QSettings()
 
         # Check if plugin was started the first time in current QGIS session
