@@ -1,8 +1,8 @@
 <RCC>
-    <qresource prefix="/plugins/oam_qgis3" >
+    <qresource prefix="/plugins/oam_qgis3_express" >
         <file>icon/search_icon.png</file>
     </qresource>
-    <qresource prefix="/plugins/oam_qgis3" >
+    <qresource prefix="/plugins/oam_qgis3_express" >
         <file>icon/sample_icon.png</file>
     </qresource>
 </RCC>

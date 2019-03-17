@@ -2,7 +2,7 @@
 REM Please execute pyrcc5_set_path.bat file stored in the same directory
 
 REM Set the default plugin folder
-SET PLUGIN_NAME=oam_qgis3
+SET PLUGIN_NAME=oam_qgis3_express
 SET OAM_PLUGIN_DIR=%HOMEPATH%\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins\%PLUGIN_NAME%
 
 SET FOLDERS=ext_libs gui icon module temp i18n

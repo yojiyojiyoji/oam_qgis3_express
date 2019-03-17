@@ -171,7 +171,7 @@ class OAMQGIS3:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/oam_qgis3/icon/search_icon.png'
+        icon_path = ':/plugins/oam_qgis3_express/icon/search_icon.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Image Search'),
@@ -179,7 +179,7 @@ class OAMQGIS3:
             parent=self.iface.mainWindow())
 
         """
-        icon_path = ':/plugins/oam_qgis3/icon/sample_icon.png'
+        icon_path = ':/plugins/oam_qgis3_express/icon/sample_icon.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Sample Item'),
