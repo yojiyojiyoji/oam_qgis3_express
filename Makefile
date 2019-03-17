@@ -40,7 +40,7 @@ SOURCES = \
 	__init__.py \
 	oam_qgis3.py oam_qgis3_dialog.py
 
-PLUGINNAME = oam_qgis3
+PLUGINNAME = oam_qgis3_express
 
 PY_FILES = \
 	__init__.py \
