@@ -67,10 +67,10 @@ class OAMQGIS3:
 
         # Declare instance attributes
         self.actions = []
-        self.menu = self.tr(u'&OAMQGIS3')
+        self.menu = self.tr(u'&OAMQGIS3 EXPRESS')
 
         # QSettings objects
-        self.settings = QSettings('QGIS', 'OAM_QGIS3')
+        self.settings = QSettings('QGIS', 'OAM_QGIS3_EXPRESS')
         # self.settings = QSettings()
 
         # Check if plugin was started the first time in current QGIS session
