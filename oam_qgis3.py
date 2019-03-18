@@ -195,7 +195,7 @@ class OAMQGIS3:
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginMenu(
-                self.tr(u'&OAMQGIS3'),
+                self.tr(u'&OAMQGIS3 EXPRESS'),
                 action)
             self.iface.removeToolBarIcon(action)
 
