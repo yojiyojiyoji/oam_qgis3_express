@@ -191,7 +191,11 @@ class DownloadProgressWindow(QtWidgets.QWidget):
                 if self.dwThreads[index].addLayer:
                     layerAbsPath = self.dwThreads[index].fileAbsPath
                     layerName = str(os.path.basename(layerAbsPath))
-                    self.iface.addRasterLayer(layerAbsPath, layerName)
+                    insertedLayer = self.iface.addRasterLayer(
+                        layerAbsPath, layerName)
+                    # print(str(insertedLayer.id()))
+                    # if insertedLayer:
+                    #     self.iface.zoomToActiveLayer()
             elif result == 'cancelled':
                 self.qLabels[index].setText("Download cancelled.")
             else:

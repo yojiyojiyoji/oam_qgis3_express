@@ -228,7 +228,8 @@ class OAMQGIS3:
 
         # show the dialog
         self.imgSearchDialog.show()
-
+        self.imgSearchDialog.activateWindow()
+        
         # Run the dialog event loop
         result = self.imgSearchDialog.exec_()
         print(result)
