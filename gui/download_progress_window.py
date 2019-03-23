@@ -182,7 +182,7 @@ class DownloadProgressWindow(QtWidgets.QWidget):
 
     def downloadFinished(self, result, index):
         # self.thread.quit()
-        self.dwThreads[index].quit()
+        # self.dwThreads[index].quit()
         print('Result: ' + result)
         try:  # make sure if the labels still exist
             if result == 'success':
