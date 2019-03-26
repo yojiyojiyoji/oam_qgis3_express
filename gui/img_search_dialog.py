@@ -302,3 +302,4 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
         self.imgBrowser.displayThumbnail()
 
         self.imgBrowser.activateWindow()
+        self.imgBrowser.raise_()
