@@ -14,7 +14,7 @@ version=0.1
 author=yojiyojiyoji
 email=yoji.salut@gmail.com
 
-about=This plugin allows QGIS3 users to access to various OAM services as a desktop client. (Image uploader is not available in this express edition.)
+about=This plugin allows QGIS3 users to access to various OAM services as a desktop client. (Image uploader is not available in this express edition.) Note: Test version for ssl/certifi library in nominatim_search.
 
 tracker=https://github.com/yojiyojiyoji/oam_qgis3_express/issues
 repository=https://github.com/yojiyojiyoji/oam_qgis3_express.git
