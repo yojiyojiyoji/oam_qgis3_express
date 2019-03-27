@@ -211,3 +211,5 @@ class DownloadProgressWindow(QtWidgets.QWidget):
         print(str(errMsg))
         self.qLabels[index].setText("Error: " + str(errMsg))
         self.cancelButtons[index].setEnabled(False)
+        self.activateWindow()
+        self.raise_()
