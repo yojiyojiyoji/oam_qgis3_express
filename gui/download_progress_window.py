@@ -198,12 +198,16 @@ class DownloadProgressWindow(QtWidgets.QWidget):
                     # if insertedLayer:
                     #     self.iface.zoomToActiveLayer()
                 self.cancelButtons[index].setEnabled(False)
+                self.activateWindow()
+                self.raise_()
             elif result == 'cancelled':
                 self.qLabels[index].setText("Download cancelled.")
                 self.cancelButtons[index].setEnabled(False)
             else:
                 self.qLabels[index].setText("Unexpected incident occurred.")
                 self.cancelButtons[index].setEnabled(False)
+                self.activateWindow()
+                self.raise_()
         except:
             pass
 
