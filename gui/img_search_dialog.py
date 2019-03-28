@@ -176,20 +176,20 @@ class ImgSearchDialog(QtWidgets.QDialog, FORM_CLASS):
             qMsgBox.exec_()
 
     def createQSettingsQueries(self):
-        self.settings.setValue('CHECKBOX_LOCATION', True)
-        self.settings.setValue('CHECKBOX_ACQUISITION_FROM', True)
-        self.settings.setValue('CHECKBOX_ACQUISITION_TO', True)
-        self.settings.setValue('CHECKBOX_GSD_FROM', True)
-        self.settings.setValue('CHECKBOX_GSD_TO', True)
+        self.settings.setValue('CHECKBOX_LOCATION', False)
+        self.settings.setValue('CHECKBOX_ACQUISITION_FROM', False)
+        self.settings.setValue('CHECKBOX_ACQUISITION_TO', False)
+        self.settings.setValue('CHECKBOX_GSD_FROM', False)
+        self.settings.setValue('CHECKBOX_GSD_TO', False)
 
         self.settings.setValue('LOCATION', '')
         self.settings.setValue('ACQUISITION_FROM',
-            QDate.currentDate().addMonths(-12).toString(Qt.ISODate))
+            QDate.currentDate().addMonths(-48).toString(Qt.ISODate))
         self.settings.setValue('ACQUISITION_TO',
             QDate.currentDate().toString(Qt.ISODate))
         self.settings.setValue('GSD_FROM', '')
         self.settings.setValue('GSD_TO', '')
-        self.settings.setValue('LIMIT', 20)
+        self.settings.setValue('LIMIT', 80)
         self.settings.setValue('ORDER_BY', 0)
         self.settings.setValue('SORT', 'desc')
 

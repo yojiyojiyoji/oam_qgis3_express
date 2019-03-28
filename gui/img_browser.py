@@ -50,6 +50,7 @@ class ImgBrowser(QDialog, FORM_CLASS):
         self.pushButtonDownload.clicked.connect(self.downloadFullImage)
 
         self.checkBoxSaveMeta.setChecked(True)
+        self.checkBoxAddLayer.setChecked(True)
 
         self.singleMetaInDict = None
         self.thumbDownWorker = ThumbnailDownloadWorker()
