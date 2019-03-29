@@ -21,6 +21,8 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class ImgBrowser(QDialog, FORM_CLASS):
 
+    DEFAULT_DOWNLOAD_DIR = os.path.join(os.path.expanduser('~'), 'oam_images')
+
     def __init__(self, iface, parent=None):
         """Constructor."""
         #super(OAMQGIS3Dialog, self).__init__(parent)
@@ -56,6 +58,11 @@ class ImgBrowser(QDialog, FORM_CLASS):
         self.thumbDownWorker = ThumbnailDownloadWorker()
 
         self.downloadProgressWindow = None
+
+        self.lastUsedDir = None
+
+    def closeEvent(self, closeEvent):
+        self.lastUsedDir = None
 
     def setSingleMetaInDict(self, singleMetaInDict):
         self.singleMetaInDict = singleMetaInDict
@@ -127,10 +134,13 @@ class ImgBrowser(QDialog, FORM_CLASS):
     def downloadFullImage(self):
         urlFullImage = self.singleMetaInDict[u'uuid']
         imgFileName = urlFullImage.split('/')[-1]
-        defaultDir = os.path.join(os.path.expanduser('~'), 'oam_images')
-        imgAbsPath = os.path.join(defaultDir, imgFileName)
-        if not os.path.exists(defaultDir):
-            os.makedirs(defaultDir)
+
+        if self.lastUsedDir is None:
+            if not os.path.exists(self.DEFAULT_DOWNLOAD_DIR):
+                os.makedirs(self.DEFAULT_DOWNLOAD_DIR)
+            imgAbsPath = os.path.join(self.DEFAULT_DOWNLOAD_DIR, imgFileName)
+        else:
+            imgAbsPath = os.path.join(self.lastUsedDir, imgFileName)
 
         # fdlg = QFileDialog()
         rSfn = QFileDialog.getSaveFileName(
@@ -139,6 +149,11 @@ class ImgBrowser(QDialog, FORM_CLASS):
 
         # if fdlg.exec_():
         if imgAbsPath != '':
+            # Keep the last used directory
+            # self.lastUsedDir = QFileInfo(imgAbsPath).path()
+            self.lastUsedDir = os.path.dirname(imgAbsPath)
+            # print(self.lastUsedDir)
+
             # Download image metadata first
             if self.checkBoxSaveMeta.isChecked():
                 try:
