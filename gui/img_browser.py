@@ -135,7 +135,7 @@ class ImgBrowser(QDialog, FORM_CLASS):
         urlFullImage = self.singleMetaInDict[u'uuid']
         imgFileName = urlFullImage.split('/')[-1]
 
-        if self.lastUsedDir is None:
+        if self.lastUsedDir is None or (not os.path.exists(self.lastUsedDir)):
             if not os.path.exists(self.DEFAULT_DOWNLOAD_DIR):
                 os.makedirs(self.DEFAULT_DOWNLOAD_DIR)
             imgAbsPath = os.path.join(self.DEFAULT_DOWNLOAD_DIR, imgFileName)
