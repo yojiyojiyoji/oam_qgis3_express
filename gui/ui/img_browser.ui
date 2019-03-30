@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>409</width>
-    <height>528</height>
+    <width>431</width>
+    <height>538</height>
    </rect>
   </property>
   <property name="font">
@@ -21,9 +21,9 @@
   <widget class="QPushButton" name="pushButtonDownload">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>460</y>
-     <width>151</width>
+     <x>130</x>
+     <y>470</y>
+     <width>141</width>
      <height>41</height>
     </rect>
    </property>
@@ -39,8 +39,8 @@
   <widget class="QCheckBox" name="checkBoxSaveMeta">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>460</y>
+     <x>280</x>
+     <y>470</y>
      <width>131</width>
      <height>22</height>
     </rect>
@@ -52,8 +52,8 @@
   <widget class="QCheckBox" name="checkBoxAddLayer">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>480</y>
+     <x>280</x>
+     <y>490</y>
      <width>131</width>
      <height>22</height>
     </rect>
@@ -67,7 +67,7 @@
     <rect>
      <x>30</x>
      <y>250</y>
-     <width>351</width>
+     <width>371</width>
      <height>191</height>
     </rect>
    </property>
@@ -207,7 +207,7 @@
     <rect>
      <x>30</x>
      <y>20</y>
-     <width>351</width>
+     <width>371</width>
      <height>211</height>
     </rect>
    </property>

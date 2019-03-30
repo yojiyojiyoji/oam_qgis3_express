@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
+    <width>780</width>
     <height>511</height>
    </rect>
   </property>
@@ -57,7 +57,7 @@
     <rect>
      <x>380</x>
      <y>70</y>
-     <width>341</width>
+     <width>371</width>
      <height>371</height>
     </rect>
    </property>
@@ -269,10 +269,10 @@
   <widget class="QPushButton" name="pbSetDefault">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>460</y>
-     <width>171</width>
-     <height>25</height>
+     <x>390</x>
+     <y>454</y>
+     <width>181</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -282,10 +282,10 @@
   <widget class="QPushButton" name="pbLoadDefault">
    <property name="geometry">
     <rect>
-     <x>560</x>
-     <y>460</y>
-     <width>161</width>
-     <height>25</height>
+     <x>580</x>
+     <y>454</y>
+     <width>171</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
