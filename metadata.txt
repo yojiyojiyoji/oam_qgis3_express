@@ -11,7 +11,7 @@ name=Open Aerial Map (OAM) for QGIS3, Express Edition
 qgisMinimumVersion=3.4
 description=Open Aerial Map (OAM) client for QGIS3, Express Edition
 version=0.1
-author=Humanitarian OpenStreetMap Team
+author=yojiyojiyoji
 email=hotqgis@gmail.com
 
 about=This plugin allows QGIS3 users to access to various OAM services as a desktop client. (Image uploader is not available in this express edition.)
