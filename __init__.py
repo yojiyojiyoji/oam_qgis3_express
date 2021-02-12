@@ -8,7 +8,7 @@
                              -------------------
         begin                : 2019-02-14
         copyright            : (C) 2019 by yojiyojiyoji
-        email                : yoji.salut@gmail.com
+        email                : hotqgis@gmail.com
         git sha              : $Format:%H$
  ***************************************************************************/
 

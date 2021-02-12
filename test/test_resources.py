@@ -8,7 +8,7 @@
 
 """
 
-__author__ = 'yoji.salut@gmail.com'
+__author__ = 'hotqgis@gmail.com'
 __date__ = '2019-02-14'
 __copyright__ = 'Copyright 2019, yojiyojiyoji'
 
@@ -39,6 +39,3 @@ if __name__ == "__main__":
     suite = unittest.makeSuite(OAMQGIS3ResourcesTest)
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
-
-
-
