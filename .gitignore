@@ -10,3 +10,5 @@ gui/*.pyc
 *.pyc
 resources.py
 OpenAerialMap.zip
+README_BUILDER.html
+README_BUILDER.txt
