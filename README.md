@@ -4,7 +4,7 @@ With this plugin, we can search and download images and metadata via OAM catalog
 https://docs.openaerialmap.org/
 
 ## Build from source code
-(As of February 2021, this plugin is developed with QGIS 3.16 on Linux Mint 20, 64bit)
+(As of April 2021, this plugin is developed with QGIS 3.18 on Linux Mint 20, 64bit)
 
 1. Install pyrcc5:
 You need to install pyrcc5 if you don't have it installed on your system.
