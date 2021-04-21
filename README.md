@@ -8,7 +8,7 @@ https://docs.openaerialmap.org/
 
 1. Install pyrcc5:<br>
 You need to install pyrcc5 if you don't have it installed on your system. Probably, the easiest way to install pyrcc5 is to use package manager. If using ubuntu or its compatible distribution, following command should work:<br><br>
-apt-get install pyqt5-dev-tools<br><br>
+$ apt-get install pyqt5-dev-tools<br><br>
 For the other distributions, please use the online resource to get the information.
 
 2. Download the repository and deploy the code to the plugin directory:<br>
