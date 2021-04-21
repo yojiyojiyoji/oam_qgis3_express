@@ -52,7 +52,7 @@ sys.path.append(path_idna)
 
 path_requests = os.path.join(
     os.path.dirname(__file__),
-    'ext_libs/requests-2.21.0')
+    'ext_libs/requests-2.25.1')
 sys.path.append(path_requests)
 
 path_geopy = os.path.join(
