@@ -57,7 +57,7 @@ sys.path.append(path_requests)
 
 path_geopy = os.path.join(
     os.path.dirname(__file__),
-    'ext_libs/geopy-1.18.1')
+    'ext_libs/geopy-1.23.0')
 sys.path.append(path_geopy)
 
 # noinspection PyPep8Naming
