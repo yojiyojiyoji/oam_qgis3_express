@@ -7,6 +7,7 @@ from geopy.geocoders import Nominatim
 def nominatim_search(addressIn):
     ctx = ssl.create_default_context(cafile=certifi.where())
     geopy.geocoders.options.default_ssl_context = ctx
+    geopy.geocoders.options.default_user_agent = 'oam-qgis3-express-1'
     geolocator = Nominatim()
     # geolocator = Nominatim(scheme='http')
     location = geolocator.geocode(addressIn)
