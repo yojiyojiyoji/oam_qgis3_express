@@ -32,8 +32,8 @@ make.bat deploy
 
 
 ## Installation from package file
-If you already have a packaged file (.zip format), you can install it from QGIS Plugin Manager.
-
+If you already have a packaged file (.zip format), you can install it from QGIS Plugin Manager.<br />
+( You can download the packaged file at https://github.com/yojiyojiyoji/oam_qgis3_express/releases )
 1. Click "Plugin" in Menu Bar -> "Manage and Install Plugins", and plugin Window will open. <br />
 2. Select "Install from ZIP" on the left side of the window.
 3. Select the package (.zip) file of the plugin.
