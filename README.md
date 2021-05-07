@@ -27,13 +27,15 @@ Ex. (if you are using QGIS 3.16)<br />
 pyrcc5_set_path.bat 3.16
 
 2. Execute the batch file for installation<br />
-Ex.<br />
 make.bat deploy
 
 
 ## Installation from package file
-If you already have a packaged file (.zip format), you can install it from QGIS Plugin Manager.<br />
-( You can download the packaged file at https://github.com/yojiyojiyoji/oam_qgis3_express/releases )
+If you have a package file (.zip format), you can install it from QGIS Plugin Manager. You can download the package file at: <br />
+https://plugins.qgis.org/plugins/oam_qgis3_express/ &nbsp;&nbsp; (Official QGIS plugin repository) <br />
+https://github.com/yojiyojiyoji/oam_qgis3_express/releases <br />
+
+Once you downloaded the package file:
 1. Click "Plugin" in Menu Bar -> "Manage and Install Plugins", and plugin Window will open. <br />
 2. Select "Install from ZIP" on the left side of the window.
 3. Select the package (.zip) file of the plugin.
